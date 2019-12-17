@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import withAuth from "../axios";
 import FriendsForm from "./FriendsForm";
+import { Container, Card, CardBody, CardText } from "reactstrap";
 
 export default function FriendsList() {
   const [friends, setFriends] = useState([]);
@@ -17,17 +18,20 @@ export default function FriendsList() {
   }, []);
 
   return (
-    <div>
+    <Container>
+      <h1>List of Friends</h1>
       {friends.map(friend => {
         return (
-          <div key={friend.id}>
-            <p>{friend.name}</p>
-            <p>{friend.age}</p>
-            <p>{friend.email}</p>
-          </div>
+          <Card key={friend.id} className="mt-3">
+            <CardBody>
+              <CardText>Name: {friend.name}</CardText>
+              <CardText>Age: {friend.age}</CardText>
+              <CardText>Email: {friend.email}</CardText>
+            </CardBody>
+          </Card>
         );
       })}
       <FriendsForm />
-    </div>
+    </Container>
   );
 }

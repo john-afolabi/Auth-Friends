@@ -1,7 +1,9 @@
 import React, { useRef } from "react";
 import withAuth from "../axios";
+import { withRouter } from "react-router-dom";
+import { Button, Form, Label } from "reactstrap";
 
-export default function FriendsForm() {
+export function FriendsForm(props) {
   const nameRefs = useRef();
   const ageRefs = useRef();
   const emailRefs = useRef();
@@ -19,15 +21,18 @@ export default function FriendsForm() {
   };
 
   return (
-    <form>
-      <label htmlFor="name">Name</label>
-      <input type="text" id="name" ref={nameRefs} /> <br />
-      <label htmlFor="age">Age</label>
-      <input type="number" id="age" ref={ageRefs} /> <br />
-      <label htmlFor="email">Email</label>
-      <input type="email" id="email" ref={emailRefs} />
-      <br />
-      <button onClick={onSubmit}>Submit</button>
-    </form>
+    <Form className="mt-4">
+      <Label htmlFor="name">Name</Label>
+      <input className="form-control" type="text" id="name" ref={nameRefs} />
+      <Label htmlFor="age">Age</Label>
+      <input className="form-control" type="number" id="age" ref={ageRefs} />
+      <Label htmlFor="email">Email</Label>
+      <input className="form-control" type="email" id="email" ref={emailRefs} />
+      <Button className="mt-2" onClick={onSubmit}>
+        Submit
+      </Button>
+    </Form>
   );
 }
+
+export default withRouter(FriendsForm);

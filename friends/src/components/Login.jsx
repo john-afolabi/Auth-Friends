@@ -1,5 +1,12 @@
 import React, { useRef } from "react";
 import axios from "axios";
+import {
+  Button,
+  Form,
+  FormGroup,
+  Label,
+  Container
+} from "reactstrap";
 
 export default function Login(props) {
   const usernameRef = useRef();
@@ -14,7 +21,7 @@ export default function Login(props) {
       })
       .then(res => {
         localStorage.setItem("token", res.data.payload);
-        props.history.push("/friends")
+        props.history.push("/friends");
       })
       .catch(err => {
         alert(err.response.data.error);
@@ -22,13 +29,28 @@ export default function Login(props) {
   };
 
   return (
-    <form>
-      <label htmlFor="username">Username</label>{" "}
-      <input type="text" id="username" ref={usernameRef} /> <br />
-      <label htmlFor="password">Password</label>{" "}
-      <input type="password" id="password" ref={passwordRef} />
-      <br />
-      <button onClick={onSubmit}>Submit</button>
-    </form>
+    <Container>
+      <Form className="mt-4">
+        <FormGroup>
+          <Label htmlFor="username">Username</Label>
+          <input
+            className="form-control"
+            type="text"
+            id="username"
+            ref={usernameRef}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label htmlFor="password">Password</Label>
+          <input
+            className="form-control"
+            type="password"
+            id="password"
+            ref={passwordRef}
+          />
+        </FormGroup>
+        <Button onClick={onSubmit}>Submit</Button>
+      </Form>
+    </Container>
   );
 }
