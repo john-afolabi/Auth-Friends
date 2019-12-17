@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import withAuth from "../axios";
 
 export default function FriendsList() {
   const [friends, setFriends] = useState([]);
 
   useEffect(() => {
-    axios
+    withAuth()
       .get("http://localhost:5000/api/friends")
       .then(res => {
         setFriends(res.data);
