@@ -16,8 +16,12 @@ export function FriendsForm(props) {
         age: ageRefs.current.value,
         email: emailRefs.current.value
       })
-      .then(res => {})
-      .catch(err => {});
+      .then(res => {
+        props.setFriends(res.data);
+      })
+      .catch(err => {
+        alert(err.message);
+      });
   };
 
   return (

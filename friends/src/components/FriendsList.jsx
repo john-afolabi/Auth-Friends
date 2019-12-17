@@ -50,7 +50,7 @@ export default function FriendsList() {
           </Card>
         );
       })}
-      <FriendsForm />
+      <FriendsForm setFriends={setFriends}/>
     </Container>
   );
 }
