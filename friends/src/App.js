@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import "./App.css";
 import Login from "./components/Login";
 import Nav from "./components/Nav";
@@ -10,9 +10,24 @@ function App() {
     <div>
       <Nav />
       <Route exact path="/login" component={Login} />
-      <Route exact path="/friends" component={FriendsList} />
+      <PrivateRoute exact path="/friends" component={FriendsList} />
     </div>
   );
 }
+
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        localStorage.getItem("token") ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/" />
+        )
+      }
+    />
+  );
+};
 
 export default App;
